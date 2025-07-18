@@ -1,37 +1,39 @@
-# 🚀 Build a Retrieval Augmented Generation (RAG) App with Express, Langgraph and gemini
 
-This is a Dockerized Node.js application built using the [Express.js](https://expressjs.com/) framework.
+# 🚀 Build a simple LLM application using NestJS, Langchain and gemini
+
+This is a Dockerized Node.js application built using the [NestJS](https://nestjs.com/) framework.
 
 ## 📁 Folder Structure
 
 ```
-/your-app
+/app
 │
-├── bin/              # Startup files or utilities
+├── src/              # Application source code
+│   ├── app.module.ts # Main app module
+│   ├── main.ts       # Entry point
+│   └── modules/      # Feature modules (routes, services, controllers)
+│
+├── dist/             # Compiled output (after build)
 ├── node_modules/     # Node.js dependencies
-├── public/           # Static files (images, JS, CSS)
-├── routes/           # Express route handlers
-├── services/         # Business logic/services
-├── views/            # View templates (EJS, Pug, etc.)
 │
 ├── .dockerignore     # Files to ignore in Docker builds
 ├── .env              # Environment variables (do not commit)
-├── app.js            # Main application file
-├── Dockerfile        # Dockerfile (consider renaming Dockerfile.txt to Dockerfile)
+├── Dockerfile        # Dockerfile for containerization
 ├── package.json      # NPM dependencies and scripts
-├── package-lock.json # Dependency lock file
-└── README.md         # Project documentation
+├── tsconfig.json     # TypeScript configuration
+├── README.md         # Project documentation
+└── nest-cli.json     # Nest CLI configuration
 ```
 
 ---
 
 ## ⚙️ Features
 
-- Express.js web framework
+- NestJS modular web framework (TypeScript)
 - Docker support for easy deployment
 - Environment variable support via `.env`
-- Structured folder architecture
-- Scalable route & service layers
+- Scalable controller & service layers
+- Structured code with dependency injection
 
 ---
 
@@ -43,23 +45,24 @@ This is a Dockerized Node.js application built using the [Express.js](https://ex
 npm install
 ```
 
-### 2. Create `.env` file
+### 2. Create `.env` File
 
 ```env
 PORT=3000
-GOOGLE_API_KEY=gemini API KEY
+GOOGLE_API_KEY=your-gemini-api-key
 ```
 
-### 3. Run Locally
+### 3. Run Locally (Development Mode)
 
 ```bash
-node app.js or npm start
+npm run start:dev
 ```
 
-Or with `nodemon`:
+Or build and run:
 
 ```bash
-npx nodemon app.js
+npm run build
+node dist/main.js
 ```
 
 ---
@@ -69,12 +72,13 @@ npx nodemon app.js
 ### ✅ Build Docker Image
 
 ```bash
-docker build -t my-express-app Dockerfile
+docker build -t my-nest-app .
+```
 
 ### ▶️ Run Docker Container
 
 ```bash
-docker run -p 3000:3000 --env-file .env my-express-app
+docker run -p 3000:3000 --env-file .env my-nest-app
 ```
 
 ---
